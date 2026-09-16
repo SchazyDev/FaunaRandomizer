@@ -1,0 +1,335 @@
+[gd_scene load_steps=16 format=3 uid="uid://ofmhw7l3sswo"]
+
+[ext_resource type="Script" uid="uid://fauk01phsaai" path="res://Scripts/Modal.gd" id="1_e2cwd"]
+[ext_resource type="Texture2D" uid="uid://fvi3e2e8dvtd" path="res://Assets/Sprites/background.png" id="2_jwegu"]
+[ext_resource type="Shader" uid="uid://bmteo18xt6763" path="res://Assets/Shaders/star.gdshader" id="3_qvtqo"]
+[ext_resource type="Script" uid="uid://d1546vxkavx25" path="res://Scripts/AnimatedButton.gd" id="4_tfx0b"]
+[ext_resource type="AudioStream" uid="uid://c4onxh5c2jo0h" path="res://Assets/Sounds/button_press.ogg" id="5_qvtqo"]
+[ext_resource type="AudioStream" uid="uid://cjrnqji8vuvap" path="res://Assets/Sounds/button_hover.ogg" id="6_tfx0b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fawmv"]
+draw_center = false
+border_width_left = 50
+border_width_top = 50
+border_width_right = 50
+border_width_bottom = 50
+border_color = Color(0.9843137, 0.7176471, 0.11372549, 1)
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 20
+shadow_size = 50
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_figov"]
+border_width_left = 100
+border_width_top = 100
+border_width_right = 100
+border_width_bottom = 100
+border_color = Color(0.98039216, 0.6039216, 0.039215688, 1)
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vfp2"]
+shader = ExtResource("3_qvtqo")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = -0.5
+shader_parameter/shney_disperse = 1.0
+shader_parameter/shney_speed = 0.5
+shader_parameter/twist_speed = 1.0
+shader_parameter/rota_speed = 1.0
+shader_parameter/curve_ci = 0.3
+
+[sub_resource type="FontVariation" id="FontVariation_cownh"]
+variation_embolden = 1.0
+spacing_glyph = 5
+
+[sub_resource type="FontVariation" id="FontVariation_g7ajv"]
+variation_embolden = 1.0
+spacing_glyph = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vl3l7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_viex4"]
+draw_center = false
+border_width_left = 25
+border_width_top = 25
+border_width_right = 25
+border_width_bottom = 25
+border_color = Color(0.9882353, 0.7254902, 0.11372549, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_goxaf"]
+border_width_left = 100
+border_width_top = 100
+border_width_right = 100
+border_width_bottom = 100
+border_color = Color(0.98039216, 0.6039216, 0.039215688, 1)
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="FontVariation" id="FontVariation_ao2vh"]
+variation_embolden = 1.0
+spacing_glyph = 5
+
+[node name="ModalWindow" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_e2cwd")
+
+[node name="ModalBackground2" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(960, 540)
+color = Color(0, 0, 0, 0.396078)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+theme_override_constants/margin_left = 400
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 400
+theme_override_constants/margin_bottom = 300
+
+[node name="ModalPanel" type="Panel" parent="MarginContainer"]
+self_modulate = Color(1, 1, 1, 0.5058824)
+show_behind_parent = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fawmv")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ModalPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="Panel" type="Panel" parent="MarginContainer/ModalPanel"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_figov")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/ModalPanel/Panel"]
+modulate = Color(0.9843137, 0.7294118, 0.11764706, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_jwegu")
+expand_mode = 1
+
+[node name="Star" type="ColorRect" parent="MarginContainer/ModalPanel"]
+material = SubResource("ShaderMaterial_4vfp2")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = -94.0
+offset_right = 81.0
+offset_bottom = 195.0
+grow_horizontal = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="BaseModal" type="VBoxContainer" parent="MarginContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="ModalHeaderLabel" type="Label" parent="MarginContainer/MarginContainer2/BaseModal"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("FontVariation_cownh")
+theme_override_font_sizes/font_size = 65
+text = "are you sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer2/BaseModal"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="ModalConfirmButton" type="Button" parent="MarginContainer/MarginContainer2/BaseModal/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_g7ajv")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vl3l7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vl3l7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vl3l7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vl3l7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vl3l7")
+flat = true
+
+[node name="ButtonPanel" type="Panel" parent="MarginContainer/MarginContainer2/BaseModal/HBoxContainer/ModalConfirmButton" node_paths=PackedStringArray("button_object")]
+self_modulate = Color(1, 1, 1, 0.5058824)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_viex4")
+script = ExtResource("4_tfx0b")
+button_object = NodePath("..")
+hover_scale = Vector2(1.05, 1.05)
+press_sound = ExtResource("5_qvtqo")
+hover_sound = ExtResource("6_tfx0b")
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer2/BaseModal/HBoxContainer/ModalConfirmButton/ButtonPanel"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_goxaf")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer2/BaseModal/HBoxContainer/ModalConfirmButton/ButtonPanel/Panel"]
+modulate = Color(0.9843137, 0.7294118, 0.11372549, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_jwegu")
+expand_mode = 1
+
+[node name="ModalCancelButton" type="Button" parent="MarginContainer/MarginContainer2/BaseModal/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_ao2vh")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vl3l7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vl3l7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vl3l7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vl3l7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vl3l7")
+flat = true
+
+[node name="ButtonPanel" type="Panel" parent="MarginContainer/MarginContainer2/BaseModal/HBoxContainer/ModalCancelButton" node_paths=PackedStringArray("button_object")]
+self_modulate = Color(1, 1, 1, 0.5058824)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_viex4")
+script = ExtResource("4_tfx0b")
+button_object = NodePath("..")
+hover_scale = Vector2(1.05, 1.05)
+press_sound = ExtResource("5_qvtqo")
+hover_sound = ExtResource("6_tfx0b")
+
+[node name="Panel" type="Panel" parent="MarginContainer/MarginContainer2/BaseModal/HBoxContainer/ModalCancelButton/ButtonPanel"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_goxaf")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer2/BaseModal/HBoxContainer/ModalCancelButton/ButtonPanel/Panel"]
+modulate = Color(0.9843137, 0.7294118, 0.11372549, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_jwegu")
+expand_mode = 1

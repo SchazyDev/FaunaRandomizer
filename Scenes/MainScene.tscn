@@ -1,0 +1,848 @@
+[gd_scene load_steps=51 format=3 uid="uid://ct6h7s430fenq"]
+
+[ext_resource type="Script" uid="uid://cf25awxon5g2" path="res://Scripts/Main.gd" id="1_6t1o7"]
+[ext_resource type="PackedScene" uid="uid://cbg1sgsn65ddp" path="res://Scenes/MailPanel.tscn" id="2_5qxwa"]
+[ext_resource type="AudioStream" uid="uid://dfb21wiejps6p" path="res://Assets/Sounds/main_theme.ogg" id="3_5qxwa"]
+[ext_resource type="Texture2D" uid="uid://fvi3e2e8dvtd" path="res://Assets/Sprites/background.png" id="3_xc4hf"]
+[ext_resource type="Texture2D" uid="uid://b4ncm8pq01h2o" path="res://Assets/Sprites/figure.png" id="4_6rnll"]
+[ext_resource type="Shader" uid="uid://dimgrhh72x272" path="res://Assets/Shaders/rays.gdshader" id="5_enc0b"]
+[ext_resource type="AudioStream" uid="uid://di17xyffwjveg" path="res://Assets/Sounds/spin_sound.ogg" id="5_i0j58"]
+[ext_resource type="AudioStream" uid="uid://ct1qd8883gp2x" path="res://Assets/Sounds/winner_sound.ogg" id="6_c1ier"]
+[ext_resource type="Texture2D" uid="uid://ckcdkskdb4ra7" path="res://Assets/Sprites/artists.png" id="6_hx8n4"]
+[ext_resource type="AudioStream" uid="uid://dcsiqrid7tb3k" path="res://Assets/Sounds/start_sound.ogg" id="7_gyaec"]
+[ext_resource type="Texture2D" uid="uid://dg7jn4u6v73hu" path="res://Assets/Sprites/fest_logo.png" id="7_i0j58"]
+[ext_resource type="Script" uid="uid://n007wq5l7vt2" path="res://Scripts/AnimatedContainer.gd" id="8_c1ier"]
+[ext_resource type="Shader" uid="uid://bmteo18xt6763" path="res://Assets/Shaders/star.gdshader" id="9_gyaec"]
+[ext_resource type="Script" uid="uid://d1546vxkavx25" path="res://Scripts/AnimatedButton.gd" id="10_bpy1e"]
+[ext_resource type="Shader" uid="uid://sqqw554o33p1" path="res://Assets/Shaders/gradient.gdshader" id="11_p5ymy"]
+[ext_resource type="PackedScene" uid="uid://ofmhw7l3sswo" path="res://Scenes/ModalWindow.tscn" id="12_3va76"]
+[ext_resource type="Shader" uid="uid://b7pq03l236jlr" path="res://Assets/Shaders/shine.gdshader" id="12_c1ier"]
+[ext_resource type="Shader" uid="uid://djgff2jm5drui" path="res://Assets/Shaders/post_process.gdshader" id="13_wmecs"]
+[ext_resource type="AudioStream" uid="uid://c4onxh5c2jo0h" path="res://Assets/Sounds/button_press.ogg" id="15_hx8n4"]
+[ext_resource type="AudioStream" uid="uid://cjrnqji8vuvap" path="res://Assets/Sounds/button_hover.ogg" id="16_i0j58"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
+shader = ExtResource("5_enc0b")
+shader_parameter/pixelation = Vector2(1024, 1024)
+shader_parameter/gradient_steps = 64.0
+shader_parameter/gradient = ExtResource("3_xc4hf")
+shader_parameter/spread = 0.25200001127148
+shader_parameter/size = 0.4610000693975001
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 8.5
+shader_parameter/ray2_density = 8.5
+shader_parameter/ray2_intensity = 0.5
+shader_parameter/core_intensity = 1.0
+shader_parameter/hdr = false
+shader_parameter/seed = 1.0
+
+[sub_resource type="Gradient" id="Gradient_272bh"]
+colors = PackedColorArray(0.9843137, 0.34509805, 0.019607844, 1, 0.9882353, 0.7294118, 0.11764706, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5vw27"]
+gradient = SubResource("Gradient_272bh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kek77"]
+shader = ExtResource("12_c1ier")
+shader_parameter/Line_Smoothness = 0.0790000037525
+shader_parameter/Line_Width = 0.07600000361
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 12.500004868749995
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.3
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 0.2910000138225
+shader_parameter/surface = SubResource("GradientTexture2D_5vw27")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+draw_center = false
+border_width_left = 50
+border_width_top = 50
+border_width_right = 50
+border_width_bottom = 50
+border_color = Color(0.9843137, 0.7176471, 0.11372549, 1)
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 20
+shadow_size = 50
+anti_aliasing = false
+
+[sub_resource type="FontVariation" id="FontVariation_7mycd"]
+variation_embolden = 1.0
+spacing_glyph = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kek77"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4c57u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_efxa6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dg77c"]
+border_width_left = 100
+border_width_top = 100
+border_width_right = 100
+border_width_bottom = 100
+border_color = Color(0.98039216, 0.6039216, 0.039215688, 1)
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4c57u"]
+shader = ExtResource("9_gyaec")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/alpha = -0.5
+shader_parameter/shney_disperse = 1.0
+shader_parameter/shney_speed = 0.5
+shader_parameter/twist_speed = 1.0
+shader_parameter/rota_speed = 1.0
+shader_parameter/curve_ci = 0.3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycdy4"]
+draw_center = false
+border_width_left = 25
+border_width_top = 25
+border_width_right = 25
+border_width_bottom = 25
+border_color = Color(0.9882353, 0.7254902, 0.11372549, 1)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 20
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w48qg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vivmo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2cqfq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yaehf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_074og"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cegan"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_82xsv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_getpj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w48qg"]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 20
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycdy4"]
+shader = ExtResource("11_p5ymy")
+shader_parameter/invert = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t1o7"]
+draw_center = false
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(1, 0.6117647, 0.16862746, 1)
+border_blend = true
+corner_detail = 20
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vivmo"]
+shader = ExtResource("11_p5ymy")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+shader = ExtResource("13_wmecs")
+shader_parameter/exposure = 1.09200002812
+shader_parameter/contrast = 1.1050000287375
+shader_parameter/saturation = 1.0000000475
+shader_parameter/enable_pixelate = true
+shader_parameter/pixel_factor = 0.5
+shader_parameter/enable_posterize = true
+shader_parameter/color_levels = 6.00000019
+shader_parameter/dither_strength = 1.0
+shader_parameter/chrom_aberration = 0.0
+shader_parameter/vignette_strength = 1.4050000667375
+shader_parameter/grain_strength = 1.0
+shader_parameter/tint_color = Vector3(0.95, 1.03, 0.9)
+shader_parameter/tint_strength = 0.0
+shader_parameter/viewport_size_override = Vector2(0, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c1ier"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gyaec"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bpy1e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p5ymy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3va76"]
+
+[node name="Main" type="Control"]
+modulate = Color(0.76156104, 0.76156086, 0.761561, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6t1o7")
+mail_scene = ExtResource("2_5qxwa")
+background_music = ExtResource("3_5qxwa")
+spin_tick_sound = ExtResource("5_i0j58")
+winner_sound = ExtResource("6_c1ier")
+start_sound = ExtResource("7_gyaec")
+
+[node name="AudioNodes" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="AudioNodes"]
+unique_name_in_owner = true
+volume_db = -80.0
+pitch_scale = 0.01
+bus = &"Music"
+
+[node name="Spin" type="AudioStreamPlayer" parent="AudioNodes"]
+unique_name_in_owner = true
+bus = &"Spin"
+
+[node name="SFX" type="AudioStreamPlayer" parent="AudioNodes"]
+unique_name_in_owner = true
+max_polyphony = 100
+bus = &"SFX"
+
+[node name="UI_SFX" type="AudioStreamPlayer" parent="AudioNodes"]
+unique_name_in_owner = true
+volume_db = -7.5
+max_polyphony = 100
+bus = &"SFX"
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_xc4hf")
+expand_mode = 1
+
+[node name="Figure" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_6rnll")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+dragging_enabled = false
+dragger_visibility = 2
+
+[node name="DecorateSection" type="Control" parent="MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ShineShader" type="ColorRect" parent="MarginContainer/HSplitContainer/DecorateSection"]
+material = SubResource("ShaderMaterial_272bh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Artists" type="TextureRect" parent="MarginContainer/HSplitContainer/DecorateSection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_hx8n4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/DecorateSection/Artists"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Control" type="Control" parent="MarginContainer/HSplitContainer/DecorateSection/Artists/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.65
+mouse_filter = 2
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/HSplitContainer/DecorateSection/Artists/VBoxContainer"]
+clip_children = 2
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.35
+mouse_filter = 2
+texture = ExtResource("7_i0j58")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShineShader" type="ColorRect" parent="MarginContainer/HSplitContainer/DecorateSection/Artists/VBoxContainer/Logo"]
+material = SubResource("ShaderMaterial_kek77")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="MainSection" type="Control" parent="MarginContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="InputSection" type="VBoxContainer" parent="MarginContainer/HSplitContainer/MainSection"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 25
+alignment = 1
+script = ExtResource("8_c1ier")
+
+[node name="MailsPanel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/InputSection"]
+self_modulate = Color(1, 1, 1, 0.5058824)
+show_behind_parent = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5vw27")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HSplitContainer/MainSection/InputSection/MailsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="MailList" type="TextEdit" parent="MarginContainer/HSplitContainer/MainSection/InputSection/MailsPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/caret_width = 3
+theme_override_fonts/font = SubResource("FontVariation_7mycd")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kek77")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4c57u")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_efxa6")
+placeholder_text = "Укажите участников"
+emoji_menu_enabled = false
+scroll_smooth = true
+caret_blink = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/InputSection/MailsPanel"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dg77c")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/MainSection/InputSection/MailsPanel/Panel"]
+modulate = Color(0.9843137, 0.7294118, 0.11764706, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_xc4hf")
+expand_mode = 1
+
+[node name="Star" type="ColorRect" parent="MarginContainer/HSplitContainer/MainSection/InputSection/MailsPanel"]
+material = SubResource("ShaderMaterial_4c57u")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = -94.0
+offset_right = 81.0
+offset_bottom = 195.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="WinnersCountPanel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/InputSection"]
+self_modulate = Color(1, 1, 1, 0.5058824)
+show_behind_parent = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HSplitContainer/MainSection/InputSection/WinnersCountPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="WinnersCount" type="LineEdit" parent="MarginContainer/HSplitContainer/MainSection/InputSection/WinnersCountPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_constants/caret_width = 3
+theme_override_fonts/font = SubResource("FontVariation_7mycd")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w48qg")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_vivmo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2cqfq")
+placeholder_text = "Укажите количество победителей"
+alignment = 1
+max_length = 2
+caret_blink = true
+
+[node name="Panel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/InputSection/WinnersCountPanel"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dg77c")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/MainSection/InputSection/WinnersCountPanel/Panel"]
+modulate = Color(0.9843137, 0.7372549, 0.12156863, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_xc4hf")
+expand_mode = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/HSplitContainer/MainSection/InputSection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+mouse_default_cursor_shape = 2
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_7mycd")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yaehf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_074og")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cegan")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_82xsv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_getpj")
+text = "Запуск"
+
+[node name="ButtonPanel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/InputSection/StartButton" node_paths=PackedStringArray("button_object", "player")]
+self_modulate = Color(1, 1, 1, 0.5058824)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
+script = ExtResource("10_bpy1e")
+button_object = NodePath("..")
+player = NodePath("../../../../../../AudioNodes/UI_SFX")
+press_sound = ExtResource("15_hx8n4")
+hover_sound = ExtResource("16_i0j58")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HSplitContainer/MainSection/InputSection/StartButton/ButtonPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="Panel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/InputSection/StartButton/ButtonPanel"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dg77c")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/MainSection/InputSection/StartButton/ButtonPanel/Panel"]
+modulate = Color(0.9843137, 0.7294118, 0.11372549, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_xc4hf")
+expand_mode = 1
+
+[node name="ResultSection" type="VBoxContainer" parent="MarginContainer/HSplitContainer/MainSection"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 25
+alignment = 1
+script = ExtResource("8_c1ier")
+time_to_show = 1.0
+
+[node name="WheelPanel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/ResultSection"]
+self_modulate = Color(1, 1, 1, 0.5058824)
+show_behind_parent = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5vw27")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="WheelPanel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer"]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_w48qg")
+
+[node name="Control" type="Control" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/WheelPanel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MailLabels" type="VBoxContainer" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/WheelPanel/Control"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/WheelPanel/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/WheelPanel/Control/VBoxContainer"]
+material = SubResource("ShaderMaterial_ycdy4")
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/WheelPanel/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/WheelPanel/Control/VBoxContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6t1o7")
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/WheelPanel/Control/VBoxContainer"]
+material = SubResource("ShaderMaterial_vivmo")
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="ResultsPanel" type="VBoxContainer" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/ResultsPanel"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_7mycd")
+theme_override_font_sizes/font_size = 50
+text = "ПОБЕДИТЕЛИ:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResultsLabelsPanel" type="VBoxContainer" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/ResultsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/ResultsPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+mouse_default_cursor_shape = 2
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_7mycd")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yaehf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_074og")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cegan")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_82xsv")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_getpj")
+text = "Сбросить"
+
+[node name="ButtonPanel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/ResultsPanel/ResetButton" node_paths=PackedStringArray("button_object", "player")]
+self_modulate = Color(1, 1, 1, 0.5058824)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
+script = ExtResource("10_bpy1e")
+button_object = NodePath("..")
+player = NodePath("../../../../../../../../../AudioNodes/UI_SFX")
+press_sound = ExtResource("15_hx8n4")
+hover_sound = ExtResource("16_i0j58")
+
+[node name="Panel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/ResultsPanel/ResetButton/ButtonPanel"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dg77c")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/MarginContainer/ResultsPanel/ResetButton/ButtonPanel/Panel"]
+modulate = Color(0.9843137, 0.7294118, 0.11372549, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_xc4hf")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dg77c")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel/Panel"]
+modulate = Color(0.9843137, 0.7294118, 0.11764706, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_xc4hf")
+expand_mode = 1
+
+[node name="Star" type="ColorRect" parent="MarginContainer/HSplitContainer/MainSection/ResultSection/WheelPanel"]
+material = SubResource("ShaderMaterial_4c57u")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -208.0
+offset_top = -94.0
+offset_right = 81.0
+offset_bottom = 195.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="ModalWindow" parent="." instance=ExtResource("12_3va76")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+mouse_filter = 2
+
+[node name="ButtonPanel" parent="ModalWindow/MarginContainer/MarginContainer2/BaseModal/HBoxContainer/ModalConfirmButton" index="0" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../../../../AudioNodes/UI_SFX")
+
+[node name="ButtonPanel" parent="ModalWindow/MarginContainer/MarginContainer2/BaseModal/HBoxContainer/ModalCancelButton" index="0" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../../../../AudioNodes/UI_SFX")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Mask" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="PostProcess" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_5vw27")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 57.0
+grow_horizontal = 0
+stretch_mode = 1
+
+[node name="ExitButton" type="Button" parent="AspectRatioContainer" node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c1ier")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gyaec")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bpy1e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_p5ymy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3va76")
+text = "X"
+flat = true
+script = ExtResource("10_bpy1e")
+player = NodePath("../../AudioNodes/UI_SFX")
+press_sound = ExtResource("15_hx8n4")
+hover_sound = ExtResource("16_i0j58")
+
+[editable path="ModalWindow"]

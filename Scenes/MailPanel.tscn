@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbg1sgsn65ddp"]
+
+[ext_resource type="Texture2D" uid="uid://fvi3e2e8dvtd" path="res://Assets/Sprites/background.png" id="1_e11d1"]
+[ext_resource type="Script" uid="uid://skl5jwn4w511" path="res://Scripts/MailPanel.gd" id="1_lhhii"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhhii"]
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 20
+
+[sub_resource type="FontVariation" id="FontVariation_8riib"]
+variation_embolden = 1.0
+spacing_glyph = 5
+
+[node name="MailPanel" type="Control"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_lhhii")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lhhii")
+
+[node name="Label" type="Label" parent="Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_8riib")
+theme_override_font_sizes/font_size = 35
+text = "schazy@vk.com"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_e11d1")
+expand_mode = 1
