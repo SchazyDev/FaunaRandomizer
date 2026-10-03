@@ -20,6 +20,10 @@ var _mail_list : PackedStringArray
 var _winners : Array[String]
 var _winners_count : int
 
+var _raw_text : String
+var _masked_text : String
+var _applying_mask : bool
+
 var _current_target_index : int = -1
 var _is_spinning : bool
 
@@ -88,11 +92,7 @@ func _connect_signals() -> void:
 			get_tree().quit()
 	)
 
-	mail_list_input.text_changed.connect(
-		func():
-			_mail_list = mail_list_input.text.strip_edges().split("\n", false)
-	)
-
+	mail_list_input.text_changed.connect(_on_mail_input_changed)
 	winners_count_input.text_changed.connect(_on_winners_count_changed)
 	start_button.pressed.connect(_on_start_pressed)
 	reset_button.pressed.connect(_on_reset_pressed)
@@ -194,6 +194,100 @@ func _show_elements_animated() -> void:
 	await input_section.show_animated()
 
 
+func _on_mail_input_changed() -> void:
+	if _applying_mask:
+		return
+
+	var current_text : String = mail_list_input.text
+	var diff : Dictionary = _diff_strings(_masked_text, current_text)
+	_raw_text = _apply_diff(_raw_text, diff)
+
+	var new_masked : String = _mask_multiline(_raw_text)
+	if not new_masked == current_text:
+		_masked_text = new_masked
+		_reapply_masked_text()
+	
+	else:
+		_masked_text = current_text
+
+	_mail_list = _raw_text.strip_edges().split("\n", false)
+
+
+func _diff_strings(old: String, new: String) -> Dictionary:
+	var old_len : int = old.length()
+	var new_len : int = new.length()
+	var min_len : int = mini(old_len, new_len)
+
+	var prefix : int = 0
+	while prefix < min_len and old[prefix] == new[prefix]:
+		prefix += 1
+
+	var suffix : int = 0
+	while (suffix < min_len - prefix
+		and old[old_len - 1 - suffix] == new[new_len - 1 - suffix]):
+			suffix += 1
+
+	return {
+		"pos"      : prefix,
+		"old_len"  : old_len - prefix - suffix,
+		"new_text" : new.substr(prefix, new_len - prefix - suffix),
+	}
+
+
+func _apply_diff(raw: String, diff: Dictionary) -> String:
+	return (
+		raw.substr(0, diff.pos) +
+		diff.new_text +
+		raw.substr(diff.pos + diff.old_len))
+
+
+func _reapply_masked_text() -> void:
+	_applying_mask = true
+
+	var caret_line : int = mail_list_input.get_caret_line()
+	var caret_col : int = mail_list_input.get_caret_column()
+
+	mail_list_input.text = _masked_text
+	mail_list_input.set_caret_line(caret_line)
+	mail_list_input.set_caret_column(caret_col)
+
+	_applying_mask = false
+
+
+func _mask_multiline(text: String) -> String:
+	var out : PackedStringArray
+	for line : String in text.split("\n"):
+		out.append(_mask_string(line))
+		
+	return "\n".join(out)
+
+
+func _mask_string(string: String) -> String:
+	if string.is_empty():
+		return string
+
+	var at_idx : int = string.find("@")
+	if at_idx == -1:
+		return _mask_local_part(string)
+
+	return _mask_local_part(string.substr(0, at_idx)) + string.substr(at_idx)
+
+
+func _mask_local_part(adress: String) -> String:
+	var length : int = adress.length()
+	if length == 0:
+		return adress
+
+	if length <= 4:
+		return "*".repeat(length)
+
+	return (
+		adress.substr(0, 4) +
+		"*".repeat(length - 4) +
+		adress.substr(length - 2)
+	)
+
+
 func _on_winners_count_changed(new_text: String) -> void:
 	if (new_text.is_empty()
 		or not new_text.is_valid_int()):
@@ -226,6 +320,11 @@ func _on_start_pressed() -> void:
 func _on_reset_pressed() -> void:
 	_winners.clear()
 	_mail_list.clear()
+	
+	_raw_text = ""
+	_masked_text = ""
+	_applying_mask = false
+	
 	_winners_count = 0
 	_current_target_index = -1
 	_is_spinning = false
@@ -332,7 +431,7 @@ func _prepare_mail_wheel(animate: bool) -> void:
 			var mail_panel : MailPanel = mail_scene.instantiate()
 			mail_labels_section.add_child(mail_panel)
 
-			mail_panel.set_mail(_mail_list[j])
+			mail_panel.set_mail(_mask_string(_mail_list[j]))
 
 			if animate and copy == 0:
 				mail_panel.show_animated(ANIMATION_DURATION, j)
