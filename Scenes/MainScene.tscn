@@ -383,8 +383,11 @@ theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kek77")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4c57u")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_efxa6")
-placeholder_text = "Укажите участников"
+placeholder_text = "Укажите участников
+(1 участник = 1 строка)
+ИЛИ их количество"
 emoji_menu_enabled = false
+wrap_mode = 1
 scroll_smooth = true
 caret_blink = true
 

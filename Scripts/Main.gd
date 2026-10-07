@@ -1,6 +1,8 @@
 extends Control
 class_name Main
 
+const MAX_SHORTHAND_COUNT : int = 99
+
 const REVOLUTIONS : int = 3
 const ANIMATION_DURATION : float = 1
 const WHEEL_COPIES : int = REVOLUTIONS + 2
@@ -263,7 +265,7 @@ func _mask_multiline(text: String) -> String:
 
 
 func _mask_string(string: String) -> String:
-	if string.is_empty():
+	if string.is_empty() or string.is_valid_int():
 		return string
 
 	var at_idx : int = string.find("@")
@@ -299,6 +301,8 @@ func _on_winners_count_changed(new_text: String) -> void:
 
 
 func _on_start_pressed() -> void:
+	_expand_numeric_shorthand()
+	
 	if _mail_list.is_empty():
 		await _show_modal("type_mails")
 		return
@@ -343,6 +347,31 @@ func _on_reset_pressed() -> void:
 	await _switch_to_results_panel(false)
 	await _switch_sections(false)
 	await input_section.show_animated()
+
+
+func _expand_numeric_shorthand() -> void:
+	if not _mail_list.size() == 1:
+		return
+
+	var raw : String = _mail_list[0].strip_edges()
+	if not raw.is_valid_int():
+		return
+
+	var n : int = int(raw)
+	if n < 2 or n > MAX_SHORTHAND_COUNT:
+		return
+
+	var nums : Array[int]
+	nums.resize(n)
+	
+	for i : int in n:
+		nums[i] = i + 1
+		
+	nums.shuffle()
+
+	_mail_list.clear()
+	for v : int in nums:
+		_mail_list.append(str(v))
 
 
 func _show_modal(type: String) -> bool:
